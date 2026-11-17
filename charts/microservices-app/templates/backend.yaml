@@ -22,6 +22,7 @@ spec:
       containers:
         - name: backend
           image: {{ .Values.backend.image }}
+          args: null
           ports:
             - containerPort: {{ .Values.backend.port }}
           env:
