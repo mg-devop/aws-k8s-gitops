@@ -1,0 +1,43 @@
+namespace: app
+
+frontend:
+  image: nginx:1.27-alpine
+  replicas: 1
+  port: 80
+  resources:
+    requests:
+      cpu: 25m
+      memory: 32Mi
+    limits:
+      memory: 64Mi
+
+backend:
+  image: 527557824543.dkr.ecr.us-east-1.amazonaws.com/aws-k8s-backend:v1.0.0
+  replicas: 1
+  port: 8000
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      memory: 128Mi
+
+database:
+  image: postgres:15-alpine
+  port: 5432
+  dbName: appdb
+  dbUser: appuser
+  dbPassword: AppUserPass2026!
+  storage:
+    storageClassName: ebs-sc
+    size: 2Gi
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+ingress:
+  enabled: true
+  className: nginx
