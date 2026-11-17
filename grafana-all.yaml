@@ -13,11 +13,10 @@ spec:
       labels:
         app.kubernetes.io/name: grafana
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: ip-172-31-89-200
       tolerations:
       - key: "node-role.kubernetes.io/control-plane"
-        operator: "Exists"
-        effect: "NoSchedule"
-      - key: "node.kubernetes.io/disk-pressure"
         operator: "Exists"
         effect: "NoSchedule"
       containers:
@@ -35,18 +34,11 @@ spec:
           limits:
             cpu: "100m"
             memory: "128Mi"
-            ephemeral-storage: "256Mi"
+            ephemeral-storage: "128Mi"
           requests:
             cpu: "50m"
             memory: "64Mi"
-            ephemeral-storage: "128Mi"
-        volumeMounts:
-        - name: scratch
-          mountPath: /tmp
-      volumes:
-      - name: scratch
-        emptyDir:
-          sizeLimit: 256Mi
+            ephemeral-storage: "64Mi"
 ---
 apiVersion: v1
 kind: Service
