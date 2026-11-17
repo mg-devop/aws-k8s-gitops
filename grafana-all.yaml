@@ -28,9 +28,18 @@ spec:
           limits:
             cpu: "100m"
             memory: "128Mi"
+            ephemeral-storage: "256Mi"
           requests:
             cpu: "50m"
             memory: "64Mi"
+            ephemeral-storage: "128Mi"
+        volumeMounts:
+        - name: scratch
+          mountPath: /tmp
+      volumes:
+      - name: scratch
+        emptyDir:
+          sizeLimit: 256Mi
 ---
 apiVersion: v1
 kind: Service
