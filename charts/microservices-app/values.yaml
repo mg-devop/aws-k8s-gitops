@@ -12,7 +12,7 @@ frontend:
       memory: 64Mi
 
 backend:
-  image: 527557824543.dkr.ecr.us-east-1.amazonaws.com/aws-k8s-backend:v1.0.0
+  image: 527557824543.dkr.ecr.us-east-1.amazonaws.com/aws-k8s-backend:sha-e03fc0c42a808b8e37d525ec60a074f34876b801
   replicas: 1
   port: 8000
   resources:
