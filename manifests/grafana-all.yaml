@@ -16,29 +16,31 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: ip-172-31-89-200
       tolerations:
-      - key: "node-role.kubernetes.io/control-plane"
-        operator: "Exists"
-        effect: "NoSchedule"
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
-      - name: grafana
-        image: grafana/grafana:latest
-        ports:
-        - containerPort: 3000
-          name: http
-        env:
-        - name: GF_SERVER_ROOT_URL
-          value: "http://35.174.175.119:31829/grafana"
-        - name: GF_SERVER_SERVE_FROM_SUB_PATH
-          value: "true"
-        resources:
-          limits:
-            cpu: "100m"
-            memory: "128Mi"
-            ephemeral-storage: "128Mi"
-          requests:
-            cpu: "50m"
-            memory: "64Mi"
-            ephemeral-storage: "64Mi"
+        - name: grafana
+          image: grafana/grafana:latest
+          ports:
+            - containerPort: 3000
+              name: http
+          env:
+            - name: GF_SERVER_HTTP_ADDR
+              value: "0.0.0.0"
+            - name: GF_SERVER_ROOT_URL
+              value: "http://13.221.13.26:30937/grafana"
+            - name: GF_SERVER_SERVE_FROM_SUB_PATH
+              value: "true"
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "128Mi"
+              ephemeral-storage: "128Mi"
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+              ephemeral-storage: "64Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -50,10 +52,10 @@ spec:
   selector:
     app.kubernetes.io/name: grafana
   ports:
-  - port: 80
-    targetPort: 3000
-    protocol: TCP
-    name: http
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+      name: http
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -67,12 +69,12 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - http:
-      paths:
-      - path: /grafana(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: grafana
-            port:
-              number: 80
+    - http:
+        paths:
+          - path: /grafana(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: grafana
+                port:
+                  number: 80
