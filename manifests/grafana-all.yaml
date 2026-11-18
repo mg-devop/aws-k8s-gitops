@@ -25,6 +25,13 @@ spec:
           ports:
             - containerPort: 3000
               name: http
+          env:
+            - name: GF_SERVER_HTTP_ADDR
+              value: "0.0.0.0"
+            - name: GF_SERVER_ROOT_URL
+              value: "http://13.221.13.26:30937/grafana"
+            - name: GF_SERVER_SERVE_FROM_SUB_PATH
+              value: "true"
           resources:
             limits:
               cpu: "100m"
@@ -60,7 +67,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /
+          - path: /grafana
             pathType: Prefix
             backend:
               service:
