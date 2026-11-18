@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/mg-devop/aws-k8s-gitops.git
     targetRevision: main
-    path: manifests
+    path: argocd-apps
   destination:
     server: https://kubernetes.default.svc
     namespace: default
