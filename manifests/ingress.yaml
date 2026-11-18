@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: argocd.local
+  - host: "13.221.13.26"
     http:
       paths:
       - path: /
@@ -28,7 +28,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: grafana.local
+  - host: "13.221.13.26"
     http:
       paths:
       - path: /
