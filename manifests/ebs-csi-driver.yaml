@@ -993,3 +993,8 @@ spec:
   fsGroupPolicy: File
   nodeAllocatableUpdatePeriodSeconds: 10
   podInfoOnMount: false
+  requiresRepublish: false
+  seLinuxMount: false
+  storageCapacity: false
+  volumeLifecycleModes:
+  - Persistent
