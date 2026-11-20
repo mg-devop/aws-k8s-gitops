@@ -24,6 +24,11 @@ spec:
           ports:
             - containerPort: 3000
               name: http
+          env:
+            - name: GF_SERVER_SERVE_FROM_SUB_PATH
+              value: "true"
+            - name: GF_SERVER_ROOT_URL
+              value: "http://34.205.139.242:30937/grafana/"
           volumeMounts:
             - name: grafana-storage
               mountPath: /var/lib/grafana
