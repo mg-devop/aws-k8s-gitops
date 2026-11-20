@@ -4,7 +4,7 @@ metadata:
   name: aws-k8s-gitops-root
   namespace: argocd
   finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
@@ -20,3 +20,11 @@ spec:
       prune: true
     syncOptions:
     - CreateNamespace=true
+  ignoreDifferences:
+  - group: storage.k8s.io
+    kind: CSIDriver
+    jqPathExpressions:
+    - .spec.requiresRepublish
+    - .spec.seLinuxMount
+    - .spec.storageCapacity
+    - .spec.volumeLifecycleModes
